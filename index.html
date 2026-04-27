@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeutschPath — India to Germany</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#050d1a;--surface:#0d1b2e;--card:#111f33;--cardh:#162440;
+    --gold:#f5a623;--goldD:#d4891a;--glow:rgba(245,166,35,.18);
+    --green:#10b981;--red:#ef4444;--blue:#3b82f6;
+    --text:#f1f5f9;--muted:#5a7090;--dim:#2e4460;
+    --border:rgba(255,255,255,.07);--borderG:rgba(245,166,35,.22);
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif;min-height:100vh}
+  ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--surface)}::-webkit-scrollbar-thumb{background:var(--dim);border-radius:3px}
+
+  /* NAV */
+  nav{background:rgba(5,13,26,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo-mark{width:34px;height:34px;border-radius:9px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:#1a0900}
+  .logo-name{font-weight:800;font-size:18px;color:var(--gold);letter-spacing:-.3px}
+  .logo-sub{font-size:10px;color:var(--muted);margin-top:-2px}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .lang-btn{background:rgba(245,166,35,.1);border:1px solid var(--borderG);color:var(--gold);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;transition:background .2s}
+  .lang-btn:hover{background:rgba(245,166,35,.2)}
+  .nav-cta{background:var(--gold);border:none;color:#1a0900;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .2s}
+  .nav-cta:hover{opacity:.88}
+
+  /* BUTTONS */
+  .btn-primary{background:var(--gold);border:none;color:#1a0900;padding:13px 26px;border-radius:10px;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;transition:opacity .2s,transform .12s;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+  .btn-primary:active{transform:scale(.98)}
+  .btn-outline{background:transparent;border:1px solid var(--border);color:var(--text);padding:13px 26px;border-radius:10px;font-weight:600;font-size:15px;cursor:pointer;font-family:inherit;transition:border-color .2s,background .2s}
+  .btn-outline:hover{border-color:var(--borderG);background:var(--glow)}
+
+  /* SECTIONS */
+  .section{max-width:1100px;margin:0 auto;padding:80px 2rem}
+  .section-title{font-size:36px;font-weight:800;letter-spacing:-.6px;margin-bottom:8px}
+  .section-sub{color:var(--muted);font-size:15px;margin-bottom:3rem}
+  .surface{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+
+  /* HERO */
+  .hero{max-width:1100px;margin:0 auto;padding:88px 2rem 72px}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,.1);border:1px solid var(--borderG);border-radius:24px;padding:7px 18px;margin-bottom:1.5rem}
+  .hero-badge span{font-size:12px;color:var(--gold);font-weight:600}
+  .hero h1{font-size:58px;font-weight:800;line-height:1.08;letter-spacing:-1.5px;margin-bottom:1.25rem}
+  .hero-sub{font-size:17px;color:var(--muted);line-height:1.8;max-width:560px;margin-bottom:2rem}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
+  .flag-strip{display:flex;gap:6px;max-width:220px}
+  .flag-strip div{flex:1;height:5px;border-radius:3px}
+
+  /* STATS */
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stat{text-align:center;padding:2rem 1rem;border-right:1px solid var(--border)}
+  .stat:last-child{border-right:none}
+  .stat-n{font-size:38px;font-weight:800;color:var(--gold);letter-spacing:-1px}
+  .stat-l{font-size:12px;color:var(--muted);margin-top:5px;font-weight:500}
+
+  /* SERVICES */
+  .serv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+  .serv-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.75rem;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
+  .serv-card:hover{border-color:var(--borderG);background:var(--cardh);transform:translateY(-2px)}
+  .serv-badge{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;margin-bottom:1rem}
+  .serv-title{font-size:16px;font-weight:700;margin-bottom:8px}
+  .serv-desc{font-size:13px;color:var(--muted);line-height:1.75}
+  .serv-more{margin-top:1.25rem;font-size:12px;color:var(--gold);font-weight:600}
+
+  /* QUIZ */
+  .quiz-wrap{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:2.5rem;max-width:680px}
+  .quiz-start-ico{width:64px;height:64px;border-radius:50%;background:var(--glow);border:2px solid var(--borderG);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:26px;font-weight:800;color:var(--gold)}
+  .quiz-progress{height:4px;background:var(--dim);border-radius:2px;margin-bottom:2rem}
+  .quiz-bar{height:100%;background:var(--gold);border-radius:2px;transition:width .35s ease}
+  .quiz-q{font-size:19px;font-weight:700;margin-bottom:1.5rem;line-height:1.45;color:var(--text)}
+  .opt{width:100%;padding:12px 16px;margin-bottom:10px;border-radius:10px;font-size:14px;font-weight:500;text-align:left;background:var(--surface);border:1px solid var(--border);color:var(--text);cursor:pointer;display:flex;align-items:center;gap:12px;transition:background .15s,border-color .15s;font-family:inherit}
+  .opt:hover:not([disabled]){background:var(--glow);border-color:var(--borderG)}
+  .opt[disabled]{cursor:default}
+  .opt-key{width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+  .opt.correct{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.45)}
+  .opt.wrong{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.45)}
+
+  /* TUTORS */
+  .tutor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+  .tutor-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;text-align:center;transition:border-color .2s,background .2s}
+  .tutor-card:hover{border-color:var(--borderG);background:var(--cardh)}
+  .tutor-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;margin:0 auto 1rem}
+  .tutor-name{font-weight:700;font-size:15px;margin-bottom:8px}
+  .tutor-meta{font-size:11px;color:var(--muted);margin-bottom:4px}
+  .tutor-price{color:var(--gold);font-weight:800;font-size:16px}
+  .tutor-rating{font-size:12px;color:var(--muted)}
+
+  /* LOAN */
+  .loan-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+  .loan-point{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .loan-check{width:22px;height:22px;border-radius:50%;background:rgba(16,185,129,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .loan-check::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--green)}
+  .bank-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.75rem}
+  .bank-row{padding:11px 0;border-bottom:1px solid var(--border);font-size:13px;display:flex;align-items:center;gap:10px;color:var(--muted)}
+  .bank-row:last-child{border-bottom:none}
+  .bank-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
+
+  /* CHAT */
+  .chat-wrap{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:680px}
+  .chat-header{background:var(--card);padding:1rem 1.25rem;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+  .chat-avatar{width:38px;height:38px;border-radius:50%;background:var(--glow);display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid var(--borderG)}
+  .chat-status{font-size:11px;color:var(--green)}
+  .chat-msgs{height:320px;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:10px}
+  .chat-msgs::-webkit-scrollbar{width:3px}.chat-msgs::-webkit-scrollbar-thumb{background:var(--dim);border-radius:2px}
+  .bubble{max-width:85%;padding:10px 14px;font-size:13px;line-height:1.7;white-space:pre-wrap;border-radius:4px}
+  .bubble.bot{align-self:flex-start;background:var(--card);border:1px solid var(--border);border-radius:14px 14px 14px 4px}
+  .bubble.user{align-self:flex-end;background:var(--gold);color:#1a0900;border-radius:14px 14px 4px 14px}
+  .chat-input-row{padding:1rem;border-top:1px solid var(--border);display:flex;gap:8px}
+  .chat-input{flex:1;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border-color .2s}
+  .chat-input:focus{border-color:var(--borderG)}
+  .chat-send{background:var(--gold);border:none;color:#1a0900;padding:10px 18px;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;transition:opacity .2s}
+  .chat-send:hover{opacity:.88}
+  .chat-send:disabled{opacity:.4;cursor:not-allowed}
+
+  /* RESOURCES STRIP */
+  .res-strip{border:1px solid var(--borderG);background:rgba(245,166,35,.05);border-radius:18px;padding:2.5rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap}
+  .res-label{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+  .res-title{font-size:24px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px}
+  .res-sub{color:var(--muted);font-size:13px}
+
+  /* FOOTER */
+  .footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
+  .footer-logo{font-size:22px;font-weight:800;color:var(--gold);margin-bottom:6px}
+  .footer-tag{color:var(--muted);font-size:13px;margin-bottom:1.5rem}
+  .footer-contact{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+  .footer-contact span{font-size:12px;color:var(--muted)}
+  .footer-flag{display:flex;gap:5px;justify-content:center;margin-bottom:1.5rem}
+  .footer-flag div{width:36px;height:4px;border-radius:2px}
+  .footer-copy{font-size:11px;color:var(--dim)}
+
+  @media(max-width:768px){
+    nav{padding:0 1rem}.nav-links{display:none}
+    .hero h1{font-size:36px}.hero{padding:56px 1rem 48px}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}.stat{border-right:none;border-bottom:1px solid var(--border)}
+    .serv-grid{grid-template-columns:1fr 1fr}.tutor-grid{grid-template-columns:1fr 1fr}
+    .loan-grid{grid-template-columns:1fr}.section{padding:56px 1rem}
+    .res-strip{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="logo-mark">D</div>
+    <div>
+      <div class="logo-name">DeutschPath</div>
+      <div class="logo-sub">India → Germany</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services" id="nl0">Services</a></li>
+    <li><a href="#quiz" id="nl1">German Quiz</a></li>
+    <li><a href="#tutors" id="nl2">Tutors</a></li>
+    <li><a href="#loan" id="nl3">Loan</a></li>
+    <li><a href="#chat" id="nl4">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:10px;align-items:center">
+    <button class="lang-btn" id="lang-btn" onclick="toggleLang()">हिंदी</button>
+    <button class="nav-cta" onclick="scrollToChat()" id="nav-cta">📞 Call Now</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <span id="badge-txt">🇩🇪 India's #1 Germany Migration Consultancy</span>
+  </div>
+  <h1 id="hero-h1">Start Your <span style="color:var(--gold)">German Dream</span><br>Today</h1>
+  <p class="hero-sub" id="hero-sub">Complete end-to-end support — from visa application to settling in Germany. Expert guidance in Hindi & English.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="scrollToChat()" id="hero-cta1">Free Consultation →</button>
+    <button class="btn-outline" onclick="scrollToQuiz()" id="hero-cta2">Take German Quiz</button>
+  </div>
+  <div class="flag-strip">
+    <div style="background:#111"></div>
+    <div style="background:#cc0000"></div>
+    <div style="background:#d4a017"></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="surface">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="stats-grid">
+      <div class="stat"><div class="stat-n">2,400+</div><div class="stat-l" id="stat0">Visas Processed</div></div>
+      <div class="stat"><div class="stat-n">94%</div><div class="stat-l" id="stat1">Success Rate</div></div>
+      <div class="stat"><div class="stat-n">50+</div><div class="stat-l" id="stat2">Partner Companies</div></div>
+      <div class="stat"><div class="stat-n">8 Yrs</div><div class="stat-l" id="stat3">Experience</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="section">
+  <h2 class="section-title" id="serv-title">Our Services</h2>
+  <p class="section-sub" id="serv-sub">Everything you need for your Germany journey — under one roof</p>
+  <div class="serv-grid" id="serv-grid"></div>
+</section>
+
+<!-- QUIZ -->
+<div class="surface" id="quiz">
+  <section class="section">
+    <h2 class="section-title" id="quiz-title">Test Your German</h2>
+    <p class="section-sub" id="quiz-sub">Quick A1–B1 quiz to assess your current level</p>
+    <div class="quiz-wrap" id="quiz-box"></div>
+  </section>
+</div>
+
+<!-- TUTORS -->
+<section id="tutors" class="section">
+  <h2 class="section-title" id="tutor-title">Book a Personal Tutor</h2>
+  <p class="section-sub" id="tutor-sub">One-on-one sessions with certified German language experts</p>
+  <div class="tutor-grid" id="tutor-grid"></div>
+</section>
+
+<!-- LOAN -->
+<div class="surface" id="loan">
+  <section class="section">
+    <div class="loan-grid">
+      <div>
+        <h2 class="section-title" id="loan-title">Loan Support</h2>
+        <p class="section-sub" id="loan-sub">We help finance your entire Germany journey</p>
+        <div id="loan-pts"></div>
+        <button class="btn-primary" style="margin-top:1rem" onclick="scrollToChat()" id="loan-cta">Apply for Loan →</button>
+      </div>
+      <div class="bank-card">
+        <h3 style="color:var(--gold);font-size:16px;font-weight:700;margin-bottom:1.25rem" id="bank-title">Partner Banks & NBFCs</h3>
+        <div id="bank-list"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- RESOURCES STRIP -->
+<section class="section" style="padding-top:0">
+  <div class="res-strip">
+    <div>
+      <div class="res-label">FREE DOWNLOAD</div>
+      <div class="res-title" id="res-title">Germany Starter Pack</div>
+      <div class="res-sub" id="res-sub">Visa checklist · A1 vocabulary · Cost of living guide — free in Hindi & English</div>
+    </div>
+    <button class="btn-primary" onclick="scrollToChat()" id="res-cta">Get Free Pack →</button>
+  </div>
+</section>
+
+<!-- CHAT -->
+<div class="surface" id="chat">
+  <section class="section">
+    <h2 class="section-title" id="chat-title">AI Assistant</h2>
+    <p class="section-sub" id="chat-sub">Instant answers in Hindi or English — 24/7</p>
+    <div class="chat-wrap">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div>
+          <div style="font-weight:700;font-size:14px">DeutschPath AI</div>
+          <div class="chat-status" id="chat-status">● Online</div>
+        </div>
+      </div>
+      <div class="chat-msgs" id="chat-msgs"></div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chat-input" placeholder="Ask about Germany visa, language, jobs..." onkeydown="if(event.key==='Enter')sendMessage()">
+        <button class="chat-send" id="chat-send" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">DeutschPath</div>
+  <div class="footer-tag" id="footer-tag">Your trusted bridge from India to Germany.</div>
+  <div class="footer-contact">
+    <span>📧 info@deutschpath.in</span>
+    <span>📞 +91 98765 43210</span>
+    <span>📍 Delhi · Mumbai · Bangalore</span>
+  </div>
+  <div class="footer-flag">
+    <div style="background:#111"></div>
+    <div style="background:#990000"></div>
+    <div style="background:#9a7200"></div>
+  </div>
+  <div class="footer-copy" id="footer-copy">© 2025 DeutschPath Consultancy. All rights reserved.</div>
+</footer>
+
+<script>
+/* ─── DATA ─── */
+const EN = {
+  langBtn:'हिंदी', navCta:'📞 Call Now',
+  badge:'🇩🇪 India\'s #1 Germany Migration Consultancy',
+  heroH1:'Start Your <span style="color:var(--gold)">German Dream</span><br>Today',
+  heroSub:'Complete end-to-end support — from visa application to settling in Germany. Expert guidance in Hindi & English.',
+  heroCta1:'Free Consultation →', heroCta2:'Take German Quiz',
+  stats:['Visas Processed','Success Rate','Partner Companies','Experience'],
+  servTitle:'Our Services', servSub:'Everything you need for your Germany journey — under one roof',
+  services:[
+    {n:'Visa Application',d:'Work, student, job seeker & family reunion visas. Document preparation, embassy coaching & submission support.',c:'#BA7517',bg:'rgba(186,117,23,.15)',lbl:'01'},
+    {n:'Work Permit & Recognition',d:'Degree recognition (Anabin), skilled worker visa, EU Blue Card & employer matching service.',c:'#0F6E56',bg:'rgba(15,110,86,.15)',lbl:'02'},
+    {n:'German Language Classes',d:'A1–C1 with certified tutors. Online & offline batches. TestDaF, Goethe & TELC exam preparation.',c:'#185FA5',bg:'rgba(24,95,165,.15)',lbl:'03'},
+    {n:'Learning Materials',d:'Curated PDFs, video courses, vocabulary builders & grammar guides in Hindi & English.',c:'#534AB7',bg:'rgba(83,74,183,.15)',lbl:'04'},
+    {n:'Settlement Support',d:'Apartment hunting, Anmeldung, health insurance, bank account, SIM card setup & city orientation.',c:'#0F6E56',bg:'rgba(15,110,86,.15)',lbl:'05'},
+    {n:'Loan Assistance',d:'Education & visa loans via 15+ partner banks & NBFCs. Documentation, EMI planning & pre-approval support.',c:'#993C1D',bg:'rgba(153,60,29,.15)',lbl:'06'},
+  ],
+  quizTitle:'Test Your German', quizSub:'Quick A1–B1 quiz to assess your current level',
+  quizStart:'Start Quiz →', quizRetry:'Try Again', quizBook:'Book a Tutor',
+  qLabel:'Question', sLabel:'Score:', ql:'A1',
+  rLabels:['Excellent! B1+ Level','Good! A2–B1 Level','Beginner A1 — let\'s grow!'],
+  rMsg:'Our tutors will help you reach C1 for Germany!',
+  tutorTitle:'Book a Personal Tutor', tutorSub:'One-on-one sessions with certified German language experts',
+  bookBtn:'Book Session',
+  loanTitle:'Loan Support', loanSub:'We help finance your entire Germany journey',
+  loanPts:['Education loans up to ₹50 Lakhs','Visa & relocation cost financing','15+ partner banks & NBFCs','Collateral & non-collateral options','Expert documentation guidance','EMI planning & pre-approval assistance'],
+  loanCta:'Apply for Loan →', bankTitle:'Partner Banks & NBFCs',
+  resTitle:'Germany Starter Pack', resSub:'Visa checklist · A1 vocabulary · Cost of living guide — free in Hindi & English', resCta:'Get Free Pack →',
+  chatTitle:'AI Assistant', chatSub:'Instant answers in Hindi or English — 24/7',
+  chatStatus:'● Online', chatPH:'Ask about Germany visa, language, jobs...',
+  chatSend:'Send', footerTag:'Your trusted bridge from India to Germany.',
+  footerCopy:'© 2025 DeutschPath Consultancy. All rights reserved.',
+  greet:'Hello! I\'m your DeutschPath AI 🇩🇪\n\nI can help you with:\n• Visa types & required documents\n• German language learning tips\n• Work opportunities in Germany\n• Costs, housing & settling in Germany\n\nWhat would you like to know?',
+  navLinks:['Services','German Quiz','Tutors','Loan','Contact'],
+};
+
+const HI = {
+  langBtn:'English', navCta:'📞 कॉल करें',
+  badge:'🇩🇪 भारत की #1 जर्मनी माइग्रेशन कंसल्टेंसी',
+  heroH1:'अपना <span style="color:var(--gold)">जर्मन सपना</span><br>आज पूरा करें',
+  heroSub:'वीज़ा आवेदन से जर्मनी में बसने तक — पूरी मदद। हिंदी और अंग्रेज़ी में विशेषज्ञ मार्गदर्शन।',
+  heroCta1:'मुफ़्त परामर्श →', heroCta2:'जर्मन क्विज़ लें',
+  stats:['वीज़ा प्रोसेस','सफलता दर','साझेदार कंपनियां','अनुभव'],
+  servTitle:'हमारी सेवाएं', servSub:'जर्मनी की यात्रा के लिए सब कुछ — एक छत के नीचे',
+  services:[
+    {n:'वीज़ा आवेदन',d:'वर्क, स्टूडेंट, जॉब सीकर और फैमिली वीज़ा। दस्तावेज़ तैयारी और एम्बेसी कोचिंग।',c:'#BA7517',bg:'rgba(186,117,23,.15)',lbl:'01'},
+    {n:'वर्क परमिट और मान्यता',d:'डिग्री मान्यता (Anabin), स्किल्ड वर्कर वीज़ा, ब्लू कार्ड और नियोक्ता मिलान।',c:'#0F6E56',bg:'rgba(15,110,86,.15)',lbl:'02'},
+    {n:'जर्मन भाषा कक्षाएं',d:'A1–C1 सर्टिफाइड ट्यूटर के साथ। TestDaF, Goethe और TELC परीक्षा तैयारी।',c:'#185FA5',bg:'rgba(24,95,165,.15)',lbl:'03'},
+    {n:'शिक्षण सामग्री',d:'हिंदी और अंग्रेज़ी में PDF, वीडियो कोर्स, शब्द भंडार और व्याकरण गाइड।',c:'#534AB7',bg:'rgba(83,74,183,.15)',lbl:'04'},
+    {n:'सेटलमेंट सहायता',d:'अपार्टमेंट, Anmeldung, स्वास्थ्य बीमा, बैंक अकाउंट और SIM सेटअप।',c:'#0F6E56',bg:'rgba(15,110,86,.15)',lbl:'05'},
+    {n:'लोन सहायता',d:'15+ बैंकों के ज़रिए एजुकेशन व वीज़ा लोन। दस्तावेज़ मार्गदर्शन और EMI योजना।',c:'#993C1D',bg:'rgba(153,60,29,.15)',lbl:'06'},
+  ],
+  quizTitle:'अपना जर्मन स्तर जांचें', quizSub:'A1–B1 स्तर की त्वरित क्विज़',
+  quizStart:'क्विज़ शुरू करें →', quizRetry:'फिर से', quizBook:'ट्यूटर बुक करें',
+  qLabel:'प्रश्न', sLabel:'स्कोर:', ql:'A1',
+  rLabels:['उत्कृष्ट! B1+ स्तर','अच्छा! A2–B1 स्तर','शुरुआती A1 — आगे बढ़ें!'],
+  rMsg:'हमारे ट्यूटर आपको जर्मनी के लिए C1 तक पहुंचाएंगे!',
+  tutorTitle:'व्यक्तिगत ट्यूटर बुक करें', tutorSub:'प्रमाणित जर्मन भाषा विशेषज्ञों के साथ वन-ऑन-वन सेशन',
+  bookBtn:'सेशन बुक करें',
+  loanTitle:'लोन सहायता', loanSub:'हम आपकी पूरी जर्मनी यात्रा को फाइनेंस करने में मदद करते हैं',
+  loanPts:['₹50 लाख तक एजुकेशन लोन','वीज़ा और रिलोकेशन फाइनेंसिंग','15+ बैंकों और NBFCs के साथ साझेदारी','कोलेटरल और नॉन-कोलेटरल विकल्प','विशेषज्ञ दस्तावेज़ मार्गदर्शन','EMI योजना और प्री-अप्रूवल'],
+  loanCta:'लोन के लिए आवेदन करें →', bankTitle:'साझेदार बैंक और NBFC',
+  resTitle:'जर्मनी स्टार्टर पैक', resSub:'वीज़ा चेकलिस्ट · A1 शब्दावली · रहन-सहन गाइड — मुफ़्त हिंदी और अंग्रेज़ी में', resCta:'मुफ़्त पैक पाएं →',
+  chatTitle:'AI सहायक', chatSub:'हिंदी या अंग्रेज़ी में तुरंत जवाब — 24/7',
+  chatStatus:'● ऑनलाइन', chatPH:'जर्मनी के बारे में पूछें...',
+  chatSend:'भेजें', footerTag:'भारत से जर्मनी तक आपका विश्वसनीय सेतु।',
+  footerCopy:'© 2025 DeutschPath कंसल्टेंसी। सर्वाधिकार सुरक्षित।',
+  greet:'नमस्ते! मैं आपका DeutschPath AI हूं 🇩🇪\n\nमैं इनमें मदद कर सकता हूं:\n• वीज़ा प्रकार और दस्तावेज़\n• जर्मन भाषा सीखने के टिप्स\n• जर्मनी में काम के अवसर\n• आवास, खर्च और बसना\n\nआप क्या जानना चाहते हैं?',
+  navLinks:['सेवाएं','जर्मन क्विज़','ट्यूटर','लोन','संपर्क'],
+};
+
+const QUIZ = [
+  {q:"What does 'Hallo' mean?",o:["Goodbye","Hello","Thank you","Please"],a:1,lv:"A1"},
+  {q:"How do you say 'Thank you' in German?",o:["Bitte","Ja","Danke","Nein"],a:2,lv:"A1"},
+  {q:"'Guten Morgen' means:",o:["Good Night","Good Afternoon","Good Morning","Good Evening"],a:2,lv:"A1"},
+  {q:"Complete: 'Ich ___ aus Indien'",o:["bin","komme","habe","gehe"],a:1,lv:"A1"},
+  {q:"'Entschuldigung' means:",o:["Welcome","Thank you","Excuse me","Goodbye"],a:2,lv:"A2"},
+  {q:"'Wie heißen Sie?' means:",o:["Where are you from?","What is your name?","How old are you?","Where do you live?"],a:1,lv:"A2"},
+  {q:"Which article goes with 'Buch' (book)?",o:["der","die","das","den"],a:2,lv:"A2"},
+  {q:"Complete: 'Ich ___ Hunger' (I am hungry)",o:["bin","habe","mache","gehe"],a:1,lv:"B1"},
+  {q:"'Krankenhaus' means:",o:["Train station","Hospital","School","Supermarket"],a:1,lv:"B1"},
+  {q:"'Könnten Sie mir helfen?' means:",o:["Could you help me?","Where is help?","I need help now","Thank you for helping"],a:0,lv:"B1"},
+];
+
+const TUTORS = [
+  {name:"Priya Sharma",langs:"Hindi + English",levels:"A1–B2",exp:"6 years",rating:"4.9",price:"₹800/hr",ini:"PS",color:"#BA7517"},
+  {name:"Rahul Verma",langs:"Hindi + English",levels:"A1–C1",exp:"9 years",rating:"4.8",price:"₹950/hr",ini:"RV",color:"#185FA5"},
+  {name:"Anjali Singh",langs:"English",levels:"B1–C2",exp:"5 years",rating:"4.9",price:"₹1,100/hr",ini:"AS",color:"#0F6E56"},
+  {name:"Mohan Das",langs:"Hindi",levels:"A1–B1",exp:"4 years",rating:"4.7",price:"₹700/hr",ini:"MD",color:"#534AB7"},
+];
+
+const BANKS = ['SBI Education Loan','HDFC Credila','Avanse Financial','IDFC First Bank','Axis Bank','ICICI Bank'];
+
+/* ─── STATE ─── */
+let lang = 'en';
+let qIdx = 0, score = 0, picked = null, quizStarted = false;
+let chatHistory = [];
+let isSending = false;
+
+/* ─── LANG ─── */
+function T() { return lang === 'en' ? EN : HI; }
+
+function toggleLang() {
+  lang = lang === 'en' ? 'hi' : 'en';
+  applyLang();
+}
+
+function applyLang() {
+  const d = T();
+  document.getElementById('lang-btn').textContent = d.langBtn;
+  document.getElementById('nav-cta').textContent = d.navCta;
+  document.getElementById('badge-txt').textContent = d.badge;
+  document.getElementById('hero-h1').innerHTML = d.heroH1;
+  document.getElementById('hero-sub').textContent = d.heroSub;
+  document.getElementById('hero-cta1').textContent = d.heroCta1;
+  document.getElementById('hero-cta2').textContent = d.heroCta2;
+  ['stat0','stat1','stat2','stat3'].forEach((id,i) => { document.getElementById(id).textContent = d.stats[i]; });
+  document.getElementById('serv-title').textContent = d.servTitle;
+  document.getElementById('serv-sub').textContent = d.servSub;
+  document.getElementById('quiz-title').textContent = d.quizTitle;
+  document.getElementById('quiz-sub').textContent = d.quizSub;
+  document.getElementById('tutor-title').textContent = d.tutorTitle;
+  document.getElementById('tutor-sub').textContent = d.tutorSub;
+  document.getElementById('loan-title').textContent = d.loanTitle;
+  document.getElementById('loan-sub').textContent = d.loanSub;
+  document.getElementById('loan-cta').textContent = d.loanCta;
+  document.getElementById('bank-title').textContent = d.bankTitle;
+  document.getElementById('res-title').textContent = d.resTitle;
+  document.getElementById('res-sub').textContent = d.resSub;
+  document.getElementById('res-cta').textContent = d.resCta;
+  document.getElementById('chat-title').textContent = d.chatTitle;
+  document.getElementById('chat-sub').textContent = d.chatSub;
+  document.getElementById('chat-status').textContent = d.chatStatus;
+  document.getElementById('chat-input').placeholder = d.chatPH;
+  document.getElementById('chat-send').textContent = d.chatSend;
+  document.getElementById('footer-tag').textContent = d.footerTag;
+  document.getElementById('footer-copy').textContent = d.footerCopy;
+  ['nl0','nl1','nl2','nl3','nl4'].forEach((id,i) => { document.getElementById(id).textContent = d.navLinks[i]; });
+  renderServices();
+  renderLoanPts();
+  renderBanks();
+  renderTutors();
+  if (!quizStarted) renderQuizStart();
+}
+
+/* ─── SERVICES ─── */
+function renderServices() {
+  document.getElementById('serv-grid').innerHTML = T().services.map(s => `
+    <div class="serv-card">
+      <div class="serv-badge" style="background:${s.bg};color:${s.c}">${s.lbl}</div>
+      <div class="serv-title">${s.n}</div>
+      <div class="serv-desc">${s.d}</div>
+      <div class="serv-more">Learn more →</div>
+    </div>`).join('');
+}
+
+/* ─── LOAN ─── */
+function renderLoanPts() {
+  document.getElementById('loan-pts').innerHTML = T().loanPts.map(p => `
+    <div class="loan-point">
+      <div class="loan-check"></div>
+      <span style="font-size:14px">${p}</span>
+    </div>`).join('');
+}
+
+function renderBanks() {
+  document.getElementById('bank-list').innerHTML = BANKS.map(b => `
+    <div class="bank-row"><div class="bank-dot"></div>${b}</div>`).join('');
+}
+
+/* ─── TUTORS ─── */
+function renderTutors() {
+  document.getElementById('tutor-grid').innerHTML = TUTORS.map(t => `
+    <div class="tutor-card">
+      <div class="tutor-avatar" style="background:${t.color}22;color:${t.color};border:2px solid ${t.color}44">${t.ini}</div>
+      <div class="tutor-name">${t.name}</div>
+      <div class="tutor-meta">${t.langs}</div>
+      <div class="tutor-meta">${t.levels} · ${t.exp}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:1rem 0">
+        <span class="tutor-price">${t.price}</span>
+        <span class="tutor-rating">★ ${t.rating}</span>
+      </div>
+      <button class="btn-primary" style="width:100%;justify-content:center;padding:10px;font-size:13px" onclick="scrollToChat()">${T().bookBtn}</button>
+    </div>`).join('');
+}
+
+/* ─── QUIZ ─── */
+function scrollToQuiz() { document.getElementById('quiz').scrollIntoView({behavior:'smooth'}); }
+function scrollToChat() { document.getElementById('chat').scrollIntoView({behavior:'smooth'}); }
+
+function renderQuizStart() {
+  const d = T();
+  document.getElementById('quiz-box').innerHTML = `
+    <div style="text-align:center;padding:2rem 1rem">
+      <div class="quiz-start-ico">A1</div>
+      <h3 style="font-size:22px;font-weight:800;margin-bottom:8px">10 Questions · A1–B1</h3>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:2rem;line-height:1.7">Find your German level and get a personalised study plan!</p>
+      <button class="btn-primary" onclick="startQuiz()">${d.quizStart}</button>
+    </div>`;
+}
+
+function startQuiz() {
+  quizStarted = true; qIdx = 0; score = 0; picked = null;
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const d = T(); const q = QUIZ[qIdx];
+  document.getElementById('quiz-box').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <span style="font-size:12px;color:var(--muted)">${d.qLabel} ${qIdx+1}/${QUIZ.length}</span>
+      <span style="font-size:11px;background:var(--glow);color:var(--gold);padding:3px 11px;border-radius:12px;font-weight:700">${q.lv}</span>
+    </div>
+    <div class="quiz-progress"><div class="quiz-bar" style="width:${Math.round((qIdx+1)/QUIZ.length*100)}%"></div></div>
+    <div class="quiz-q">${q.q}</div>
+    ${q.o.map((opt,i) => `<button class="opt" id="opt${i}" onclick="pickAnswer(${i})"><span class="opt-key">${'ABCD'[i]}</span>${opt}</button>`).join('')}
+    <div style="text-align:right;margin-top:10px;font-size:12px;color:var(--muted)">${d.sLabel} <span style="color:var(--gold);font-weight:700">${score}</span></div>`;
+}
+
+function pickAnswer(i) {
+  if (picked !== null) return;
+  picked = i;
+  const ans = QUIZ[qIdx].a;
+  if (i === ans) score++;
+  for (let j = 0; j < 4; j++) {
+    const btn = document.getElementById('opt'+j);
+    if (!btn) continue;
+    btn.disabled = true;
+    if (j === ans) btn.classList.add('correct');
+    else if (j === i) btn.classList.add('wrong');
+  }
+  setTimeout(() => {
+    if (qIdx + 1 >= QUIZ.length) renderResult();
+    else { qIdx++; picked = null; renderQuestion(); }
+  }, 1100);
+}
+
+function renderResult() {
+  const d = T();
+  const lbl = score >= 8 ? d.rLabels[0] : score >= 5 ? d.rLabels[1] : d.rLabels[2];
+  const ico = score >= 8 ? '🏆' : score >= 5 ? '👍' : '📚';
+  document.getElementById('quiz-box').innerHTML = `
+    <div style="text-align:center;padding:2rem 1rem">
+      <div style="font-size:52px;margin-bottom:.5rem">${ico}</div>
+      <div style="font-size:48px;font-weight:800;color:var(--gold);margin-bottom:6px">${score}/${QUIZ.length}</div>
+      <div style="font-size:20px;font-weight:700;margin-bottom:8px">${lbl}</div>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:2rem">${d.rMsg}</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-outline" onclick="startQuiz()">${d.quizRetry}</button>
+        <button class="btn-primary" onclick="scrollToChat()">${d.quizBook}</button>
+      </div>
+    </div>`;
+}
+
+/* ─── CHATBOT ─── */
+function addBubble(role, text, id) {
+  const box = document.getElementById('chat-msgs');
+  const el = document.createElement('div');
+  if (id) el.id = id;
+  el.className = 'bubble ' + (role === 'user' ? 'user' : 'bot');
+  el.textContent = text;
+  box.appendChild(el);
+  box.scrollTop = box.scrollHeight;
+  return el;
+}
+
+async function sendMessage() {
+  if (isSending) return;
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  isSending = true;
+  document.getElementById('chat-send').disabled = true;
+
+  addBubble('user', text);
+  chatHistory.push({ role: 'user', content: text });
+
+  const loadEl = addBubble('bot', '...', 'chat-loading');
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: chatHistory }),
+    });
+
+    const data = await res.json();
+    const el = document.getElementById('chat-loading');
+
+    if (data.content && data.content[0] && data.content[0].text) {
+      const reply = data.content[0].text;
+      if (el) el.textContent = reply;
+      chatHistory.push({ role: 'assistant', content: reply });
+    } else {
+      const errMsg = data.error?.message || 'Error. Check your API key.';
+      if (el) { el.textContent = errMsg; el.style.color = '#ef4444'; }
+    }
+  } catch (err) {
+    const el = document.getElementById('chat-loading');
+    if (el) { el.textContent = 'Error: ' + err.message; el.style.color = '#ef4444'; }
+  }
+
+  isSending = false;
+  document.getElementById('chat-send').disabled = false;
+  document.getElementById('chat-msgs').scrollTop = 999999;
+}
+
+/* ─── INIT ─── */
+renderServices();
+renderLoanPts();
+renderBanks();
+renderTutors();
+renderQuizStart();
+addBubble('bot', T().greet);
+</script>
+</body>
+</html>
